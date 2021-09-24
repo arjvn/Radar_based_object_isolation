@@ -4,7 +4,7 @@ In this project 2D CA-CFAR (Cell-Averaging Constant False Alarm Rate) is impleme
 
 The following image summaries the results of this project. On the left is the reading from the pre-processed FMCW radar readings. While on the right is the filtered radar output.
 
-![](./media/ca-cfar.png)
+![](./media/in_out.png)
 
 ## Implementation
 It was defined that the FMCW radar has the following properties
@@ -52,7 +52,7 @@ The CFAR is a dynamic thesholding scheme which varies the detection threshold as
 
 The 2D CA-CFAR is implemented over the range and Doppler data, the averaged sum of the training cells around the CUT cell is used to determine a threshold. If the CUT level is greater than the threshold the cell is assigned a value of 1 else 0.
 
-![](./media/ca-cfar.png)
+![](./media/CFAR_Kernel.png)
 > 2D CA-CFAR kernel: Allocation of bins around the CUT
 
 After much experimentation the following parameters were selected:
@@ -68,3 +68,8 @@ The process above will generate a thresholded block, which is smaller than the R
 > RDM(RDM~=0 & RDM~=1) = 0
 
 This equates all values which are neither 0 or 1 to equal 0.  
+
+## Results
+The following the estimates provided by the FMCW sytem:
+
+![](./media/Filtered_Radar_Output_SigVsSpeed.jpg)
