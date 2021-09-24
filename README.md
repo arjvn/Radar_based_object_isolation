@@ -53,7 +53,7 @@ The CFAR is a dynamic thesholding scheme which varies the detection threshold as
 The 2D CA-CFAR is implemented over the range and Doppler data, the averaged sum of the training cells around the CUT cell is used to determine a threshold. If the CUT level is greater than the threshold the cell is assigned a value of 1 else 0.
 
 ![](./media/CFAR_Kernel.png)
-> 2D CA-CFAR kernel: Allocation of bins around the CUT
+> 2D CA-CFAR kernel: Allocation of bins around the CUT (source:electronicproducts.com)
 
 After much experimentation the following parameters were selected:
 -   Number of Training cells in range dimension (Tr) = 10
