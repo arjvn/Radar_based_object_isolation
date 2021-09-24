@@ -4,7 +4,7 @@ In this project 2D CA-CFAR (Cell-Averaging Constant False Alarm Rate) is impleme
 
 The following image summaries the results of this project. On the left is the reading from the pre-processed FMCW radar readings. While on the right is the filtered radar output.
 
-![](./media/in_out.png)
+![](./media/in_out.jpg)
 
 ## Implementation
 It was defined that the FMCW radar has the following properties
@@ -72,4 +72,4 @@ This equates all values which are neither 0 or 1 to equal 0.
 ## Results
 The following the estimates provided by the FMCW sytem:
 
-![](./media/Filtered_Radar_Output_SigVsSpeed.jpg)
+![](./media/output_comparision.jpg)
