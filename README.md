@@ -2,9 +2,9 @@
 
 In this project 2D CA-CFAR (Cell-Averaging Constant False Alarm Rate) is implemented to detect a target in noisy environment with the help of a frequency modulated continuous wave (FMCW) radar.
 
-The following image summaries the results of this project. On the left is the reading from the pre-processed FMCW radar readings. While on the right is the filtered radar output. 
+The following image summaries the results of this project. On the left is the reading from the pre-processed FMCW radar readings. While on the right is the filtered radar output.
 
-![](.readme/ca-cfar.png)
+![](./media/ca-cfar.png)
 
 ## Implementation
 It was defined that the FMCW radar has the following properties
@@ -25,20 +25,20 @@ With the given specifications and the 5.5 sweep to round trip rule of thumb, the
 
 The beat signal from this object is produced and the Fast Fourier Transform is used to determine the distance to the target. As can be observed in the normalised signal strength vs. range plot (produced by the first FFT) below, the resultant peak is found at **110m**.
 
-![](.readme/ca-cfar.png)
+![](./media/Normalised_range_from_First_FFT.jpg)
 >Range from first FFT: normalised signal strength vs. range plot  
 
 With the help of the 2nd FFT, we can generate the second Range Doppler Map. In order to extract velocity and range information from this map while avoiding erroneous detentions due to noise, a dynamic thresholding filter needs to be deployed. For this project, the Constant False Alarm Rate (CFAR) filter has been selected.
 
-![](.readme/ca-cfar.png)
+![](./media/2D_FFT_Speed_Range_Sig.jpg)
 >FFT2 surface plot: Amplitude vs Range vs Speed
 
- 
+
 ##  Constant False Alarm Rate (CFAR)
 The CFAR is a dynamic thesholding scheme which varies the detection threshold as a function of the 'local environment'.  It does this by comparing the radar bin in question (the Cell Under Test or CUT) with its local surrounding environment ( the training cells). It is though this comparison that the scheme determines the need to raise a detection alarm.
 
 ### CA-CFAR steps
-1. Select the number of training and guard cells for each dimension, range and Doppler which will surround the CUT. 
+1. Select the number of training and guard cells for each dimension, range and Doppler which will surround the CUT.
 		- Training cells:
 		- Guard cells:
 2. Move the CUT across the entire matrix
@@ -52,7 +52,7 @@ The CFAR is a dynamic thesholding scheme which varies the detection threshold as
 
 The 2D CA-CFAR is implemented over the range and Doppler data, the averaged sum of the training cells around the CUT cell is used to determine a threshold. If the CUT level is greater than the threshold the cell is assigned a value of 1 else 0.
 
-![](.readme/ca-cfar.png)
+![](./media/ca-cfar.png)
 > 2D CA-CFAR kernel: Allocation of bins around the CUT
 
 After much experimentation the following parameters were selected:
@@ -62,11 +62,9 @@ After much experimentation the following parameters were selected:
 -   Number of Guard cells in doppler dimension (Gd) = 4
 -   Offset = 1.4
 
-## Suppression of non-threshold cells at edge 
-The process above will generate a thresholded block, which is smaller than the Range Doppler Map as the CUT cannot be located at the edges of matrix. Hence,few cells will not be thresholded. To keep the map size same set those values to 0 the following is used. 
+## Suppression of non-threshold cells at edge
+The process above will generate a thresholded block, which is smaller than the Range Doppler Map as the CUT cannot be located at the edges of matrix. Hence,few cells will not be thresholded. To keep the map size same set those values to 0 the following is used.
 
 > RDM(RDM~=0 & RDM~=1) = 0
 
 This equates all values which are neither 0 or 1 to equal 0.  
-
-
